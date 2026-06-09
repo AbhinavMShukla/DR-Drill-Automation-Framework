@@ -175,12 +175,12 @@ Server Administrator | PowerShell Automation Enthusiast | Wintel Infrastructure 
 
 LinkedIn: https://www.linkedin.com/in/abhinavmshukla
 
-GitHub: https://github.com/<your-github-username>
+GitHub: https://github.com/AbhinavMShukla
 
 ---
 
 ## Version
 
-Current Release: **v1.0**
+Current Release: **v1.1**
 
 Initial Release Date: **June 2026**
