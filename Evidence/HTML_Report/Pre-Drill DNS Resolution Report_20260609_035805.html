@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<style>
+@page { 
+    size: A4 portrait; 
+    margin: 20mm 15mm 20mm 15mm;
+      }
+/* Fixed Bottom-Left Logo for Table Pages to avoid overlaps */
+.fixed-logo-bottom {
+    position: fixed;
+    bottom: 1mm;
+    left: -1mm;
+    height: 45px;
+    opacity: 0.6;
+    z-index: 9999;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+}
+body::before {
+    content: "";
+    position: fixed;
+    bottom: 0px;         
+    right: 0px;        
+    width: 90px;        
+    height: 90px;       
+    background-image: url('C:/Project/DR_Drill/Data/watermark.png'); 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0.6;    
+    z-index: -1000;   
+    pointer-events: none;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+}
+
+body { 
+    font-family: 'Segoe UI', Arial, sans-serif; 
+    background-color: transparent !important; 
+    margin: 0; 
+    color: #2C3E50; 
+    font-size: 11px; 
+    line-height: 1.5;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+}
+
+/* COVER PAGE SPECIFIC STYLES */
+.cover-logo {
+    height: 75px;
+    margin-bottom: 30px;
+}
+.cover-wrapper {
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid #2c3e50;
+    border-radius: 4px;
+    padding: 30px;
+    margin-top: 5mm;
+}
+.cover-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #2c3e50;
+    margin-bottom: 5px;
+    letter-spacing: 0.5px;
+}
+.cover-subtitle {
+    font-size: 12px;
+    color: #7f8c8d;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #2c3e50;
+    padding-bottom: 12px;
+    width: 65%;
+}
+.cover-meta-box {
+    text-align: left;
+    background-color: #f8f9fa;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    padding: 15px 20px;
+    width: 65%;
+    margin-bottom: 30px;
+}
+.cover-meta-item {
+    font-size: 13px;
+    margin-bottom: 6px;
+    color: #34495e;
+}
+.cover-meta-label {
+    font-weight: bold;
+    color: #2c3e50;
+    display: inline-block;
+    width: 160px;
+}
+.cover-scope-box {
+    width: 65%;
+    text-align: left;
+}
+.cover-scope-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    color: #2c3e50;
+    font-size: 11px;
+}
+
+/* DETAILS PAGE STYLES */
+.title-block { text-align: center; margin-bottom: 20px; background: transparent !important; }
+.title-block h1 { margin: 0; color: #2c3e50; font-size: 18px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; }
+.title-block p { margin: 4px 0 0 0; font-size: 10px; color: #7f8c8d; font-weight: bold; text-transform: uppercase; }
+
+.section-box { border: 1px solid #e2e8f0; border-radius: 4px; padding: 10px 12px; margin-bottom: 12px; background-color: transparent !important; page-break-inside: avoid; }
+.section-title-top { font-size: 11px; color: #2c3e50; font-weight: bold; text-transform: uppercase; margin-bottom: 4px; border-bottom: 1px solid #e2e8f0; padding-bottom: 2px; }
+.section-box p { margin: 0 0 4px 0; text-align: justify; }
+.section-box ul { margin: 2px 0 0 0; padding-left: 15px; }
+.section-box li { margin-bottom: 2px; }
+
+.dashboard { display: flex; justify-content: space-between; margin-bottom: 15px; gap: 6px; background: transparent !important; page-break-inside: avoid; }
+.dashboard a { flex: 1 1 0; text-decoration: none; color: inherit !important; display: block; }
+.card { border-radius: 3px; padding: 6px; text-align: center; color: #ffffff !important; font-weight: bold; font-size: 10px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); height: 100%; box-sizing: border-box; }
+
+.card-pass { background: linear-gradient(135deg, #27ae60, #2ec46f); }
+.card-fail { background: linear-gradient(135deg, #c0392b, #e74c3c); }
+.card-skip { background: linear-gradient(135deg, #d35400, #f39c12); }
+.card-rate { background: linear-gradient(135deg, #2980b9, #3498db); }
+.card-value { font-size: 15px; font-weight: bold; margin-top: 1px; display: block; color: #ffffff !important; }
+.section-title { font-size: 11px; color: #2c3e50; margin-top: 15px; margin-bottom: 6px; border-left: 3px solid #2c3e50; padding-left: 6px; font-weight: bold; text-transform: uppercase; scroll-margin-top: 25px; }
+
+.info-table { width: 100%; border-collapse: collapse; margin-bottom: 12px; font-size: 10.5px; background-color: transparent !important; }
+.info-table th { background-color: #2c3e50 !important; color: #fff !important; padding: 5px 7px; font-weight: 600; text-align: left; border: 1px solid #ddd; text-transform: uppercase; font-size: 9.5px; }
+.info-table td { padding: 5px 7px; border: 1px solid #ddd; vertical-align: middle; }
+
+.status-pass { background-color: #d4edda !important; color: #155724 !important; font-weight: bold; text-align: center; }
+.status-fail { background-color: #f8d7da !important; color: #721c24 !important; font-weight: bold; text-align: center; }
+.status-skip { background-color: #fff3cd !important; color: #856404 !important; font-weight: bold; text-align: center; }
+
+.sign-section { margin-top: 30px; display: flex; justify-content: space-between; font-size: 11px; page-break-inside: avoid; background: transparent !important; }
+.sign-column { width: 28%; border-top: 1px solid #333; text-align: center; padding-top: 5px; font-weight: bold; color: #2c3e50; }
+.page-break { page-break-before: always; }
+</style>
+</head><body>
+<div class='cover-wrapper'>
+    <img class='cover-logo' src='C:\Project\DR_Drill\Data\logo.png' alt='Corporate Logo'>
+    <div class='cover-title'>Pre-Drill DNS Resolution Report</div>
+    <div class='cover-subtitle'>Evidence of DNS Records Verification Prior to Drill Execution</div>
+    
+    <div class='cover-meta-box'>
+        <div class='cover-meta-item'><span class='cover-meta-label'>Change Request (CRQ):</span> <span style='font-weight:bold; color:#2c3e50;'>CRQ00020260606</span></div>
+        <div class='cover-meta-item'><span class='cover-meta-label'>Generation Date:</span> <span>09-Jun-2026</span></div>
+        <div class='cover-meta-item'><span class='cover-meta-label'>Execution Mode:</span> <span>Verification Only</span></div>
+        <div class='cover-meta-item'><span class='cover-meta-label'>Executed By:</span> <span>Abhinav Shukla</span></div>
+        <div class='cover-meta-item'><span class='cover-meta-label'>Total DNS Records:</span> <span>25</span></div>
+        <div class='cover-meta-item'><span class='cover-meta-label'>Automated by:</span> <span>Abhinav Shukla</span></div>
+        <div class='cover-meta-item'><span class='cover-meta-label'>Version:</span> <span>v1.1</span></div>
+        
+    </div>
+    <br><br><br><br><br><br>
+    <div style="
+    width:200px;
+    margin:20px auto;
+    padding:8px;
+    text-align:center;
+    border:2px solid #B22222;
+    background:#FDECEC;
+    color:#B22222;
+    font-weight:bold;
+    font-size:16px;
+    text-transform:uppercase;
+">CONFIDENTIAL</div>
+</div>
+
+<div class='page-break'></div>
+
+<img class='fixed-logo-bottom' src='C:\Project\DR_Drill\Data\logo.png' alt='Corporate Logo'>
+
+<div class='title-block'>
+    <h1>Pre-Drill DNS Resolution Report</h1>
+    <p>Evidence of DNS Records Verification Prior to Drill Execution</p>
+</div><br>
+
+<div class='section-title'>Result Summary Dashboard</div>
+<div class='dashboard'>
+    <a href='#pre-check-section'><div class='card card-pass'>PASS / RECOVERED<span class='card-value'>23</span></div></a>
+    <a href='#exceptions-section'><div class='card card-fail'>FAILURES<span class='card-value'>2</span></div></a>
+    <a href='#exceptions-section'><div class='card card-skip'>SKIPPED / UNKNOWN<span class='card-value'>0</span></div></a>
+    <div class='card card-rate'>SUCCESS RATE<span class='card-value'>92%</span></div>
+</div><br>
+
+
+<div class='section-box'><div class='section-title-top'>Purpose</div><p>This report documents the results of DNS Lookup of all the hosts which planned for DR mbaseline verification activities performed prior to the Disaster Recovery (DR) Drill. The objective was to check and establish an unalterable pre-drill baseline of core infrastructure DNS A records.</p></div><br>
+<div class='section-box'><div class='section-title-top'>Scope</div><ul><li>Verification of DNS A records listed in the approved DR Drill scope.</li><li>Validation of DNS resolution from the designated verification DNS server.</li></ul></div><br>
+<div class='section-box'><div class='section-title-top'>Change Summary</div><ul><li>DNS A records were reviewed against the approved DR Drill inventory.</li><li>Post-change DNS resolution validation was performed for all in-scope records to establish a clear baseline.</li></ul></div><br>
+
+<div class='section-title'>Infrastructure Environments</div>
+<table class='info-table'><tr><td><strong>Query run on Server:</strong> 192.168.10.11</td><td><strong>DR DNS Server:</strong> DR Server (192.168.10.12)</td><td><strong>Production DNS Server:</strong> Production Server (192.168.10.11)</td></tr></table>
+
+
+
+<div class='page-break'></div><section id='pre-check-section'><div class='section-title'>Appendix A: Pre-Change DNS Status Verification (09-Jun-2026 03:58:05)</div><table class='info-table'><tr><th>S.No.</th><th>FQDN / Hostname</th><th>Expected Source IP</th><th>Actual Resolved IP</th><th>Resolution Zone</th><th>Verification</th></tr><tr><td>1</td><td>dns1.abhinav.co.in</td><td>10.0.0.5</td><td>192.168.70.50</td><td style='font-weight:600;'>Unknown</td><td class='status-fail'>FAIL</td></tr><tr><td>2</td><td>dnsdnsdnsdnsdnsdnsnds2.abhinav.co.in</td><td>10.0.0.51</td><td>Query Failed</td><td style='font-weight:600;'>Timeout/Host Down</td><td class='status-fail'>FAIL</td></tr><tr><td>3</td><td>dns2.abhinav.co.in</td><td>10.0.0.51</td><td>10.0.0.51</td><td style='font-weight:600;'>Production</td><td class='status-pass'>PASS</td></tr><tr><td>4</td><td>dns3.abhinav.co.in</td><td>10.0.0.52</td><td>10.0.0.52</td><td style='font-weight:600;'>Production</td><td class='status-pass'>PASS</td></tr><tr><td>5</td><td>dns4.abhinav.co.in</td><td>10.0.0.53</td><td>10.0.0.53</td><td style='font-weight:600;'>Production</td><td class='status-pass'>PASS</td></tr><tr><td>6</td><td>dns5.abhinav.co.in</td><td>10.0.0.54</td><td>10.0.0.54</td><td style='font-weight:600;'>Production</td><td class='status-pass'>PASS</td></tr><tr><td>7</td><td>dns6.abhinav.co.in</td><td>10.0.0.55</td><td>10.0.0.55</td><td style='font-weight:600;'>Production</td><td class='status-pass'>PASS</td></tr><tr><td>8</td><td>dns7.abhinav.co.in</td><td>10.0.0.56</td><td>10.0.0.56</td><td style='font-weight:600;'>Production</td><td class='status-pass'>PASS</td></tr><tr><td>9</td><td>dns8.abhinav.co.in</td><td>10.0.0.57</td><td>10.0.0.57</td><td style='font-weight:600;'>Production</td><td class='status-pass'>PASS</td></tr><tr><td>10</td><td>dns9.abhinav.co.in</td><td>10.0.0.58</td><td>10.0.0.58</td><td style='font-weight:600;'>Production</td><td class='status-pass'>PASS</td></tr><tr><td>11</td><td>dns10.abhinav.co.in</td><td>10.0.0.59</td><td>10.0.0.59</td><td style='font-weight:600;'>Production</td><td class='status-pass'>PASS</td></tr><tr><td>12</td><td>dns11.abhinav.co.in</td><td>10.0.0.60</td><td>10.0.0.60</td><td style='font-weight:600;'>Production</td><td class='status-pass'>PASS</td></tr><tr><td>13</td><td>dns12.abhinav.co.in</td><td>10.0.0.61</td><td>10.0.0.61</td><td style='font-weight:600;'>Production</td><td class='status-pass'>PASS</td></tr><tr><td>14</td><td>dns13.abhinav.co.in</td><td>10.0.0.62</td><td>10.0.0.62</td><td style='font-weight:600;'>Production</td><td class='status-pass'>PASS</td></tr><tr><td>15</td><td>dns14.abhinav.co.in</td><td>10.0.0.63</td><td>10.0.0.63</td><td style='font-weight:600;'>Production</td><td class='status-pass'>PASS</td></tr><tr><td>16</td><td>dns15.abhinav.co.in</td><td>10.0.0.64</td><td>10.0.0.64</td><td style='font-weight:600;'>Production</td><td class='status-pass'>PASS</td></tr><tr><td>17</td><td>dns16.abhinav.co.in</td><td>10.0.0.65</td><td>10.0.0.65</td><td style='font-weight:600;'>Production</td><td class='status-pass'>PASS</td></tr><tr><td>18</td><td>dns17.abhinav.co.in</td><td>10.0.0.66</td><td>10.0.0.66</td><td style='font-weight:600;'>Production</td><td class='status-pass'>PASS</td></tr><tr><td>19</td><td>dns18.abhinav.co.in</td><td>10.0.0.67</td><td>10.0.0.67</td><td style='font-weight:600;'>Production</td><td class='status-pass'>PASS</td></tr><tr><td>20</td><td>dns19.abhinav.co.in</td><td>10.0.0.68</td><td>10.0.0.68</td><td style='font-weight:600;'>Production</td><td class='status-pass'>PASS</td></tr><tr><td>21</td><td>dns20.abhinav.co.in</td><td>10.0.0.69</td><td>10.0.0.69</td><td style='font-weight:600;'>Production</td><td class='status-pass'>PASS</td></tr><tr><td>22</td><td>dns21.abhinav.co.in</td><td>10.0.0.70</td><td>10.0.0.70</td><td style='font-weight:600;'>Production</td><td class='status-pass'>PASS</td></tr><tr><td>23</td><td>dns22.abhinav.co.in</td><td>10.0.0.71</td><td>10.0.0.71</td><td style='font-weight:600;'>Production</td><td class='status-pass'>PASS</td></tr><tr><td>24</td><td>dns23.abhinav.co.in</td><td>10.0.0.72</td><td>10.0.0.72</td><td style='font-weight:600;'>Production</td><td class='status-pass'>PASS</td></tr><tr><td>25</td><td>dns24.abhinav.co.in</td><td>10.0.0.73</td><td>10.0.0.73</td><td style='font-weight:600;'>Production</td><td class='status-pass'>PASS</td></tr></table></section><div class='page-break'></div><section id='exceptions-section'><div class='section-title'>Appendix B: Failures and Exceptions Log (09-Jun-2026 03:58:05)</div><table class='info-table'><thead><tr style='background-color: #c0392b;'><th style='color: #fff;'>S.No.</th><th style='color: #fff;'>🔴 FQDN / Hostname</th><th style='color: #fff;'>Expected IP</th><th style='color: #fff;'>Actual Resolved IP</th><th style='color: #fff;'>Root Cause / Remarks</th></tr></thead><tbody><tr><td>1</td><td style='font-weight:bold; color:#c0392b;'>dns1.abhinav.co.in</td><td>10.0.0.5</td><td style='color:#721c24; font-weight:bold;'>192.168.70.50</td><td><em>Pre-check resolution mismatched or host down.</em></td></tr><tr><td>2</td><td style='font-weight:bold; color:#c0392b;'>dnsdnsdnsdnsdnsdnsnds2.abhinav.co.in</td><td>10.0.0.51</td><td style='color:#721c24; font-weight:bold;'>Query Failed</td><td><em>Pre-check resolution mismatched or host down.</em></td></tr></tbody></table></section>
+<table>
+</table>
+</body></html>
