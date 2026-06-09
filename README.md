@@ -2,6 +2,7 @@
 
 PowerShell-based Disaster Recovery (DR) Drill Automation Framework for lifecycle validation, dashboard generation, DNS verification, and audit-ready PDF reporting.
 
+<img src="evidence/sample.jpg" width="800">
 ---
 
 ## Overview
