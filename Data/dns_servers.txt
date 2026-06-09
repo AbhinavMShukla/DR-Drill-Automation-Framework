@@ -1,0 +1,2 @@
+192.168.10.11, Production Server
+192.168.10.12, DR Server
